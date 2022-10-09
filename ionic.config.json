@@ -1,0 +1,7 @@
+{
+  "name": "IonicBioPwa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
