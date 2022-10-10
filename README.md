@@ -76,3 +76,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 ```
+
+## Samples
+
+Integrate Firebase into Ionic/Vue
+
+https://www.enappd.com/blog/ionic-vue-with-firebase-firestore/194/
+
+
+
+
+# Deploy
+
+```
+$ firebase deploy --only hosting:IonicBioPwa
+```
