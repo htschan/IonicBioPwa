@@ -35,7 +35,7 @@ Install the Firebase CLI
 $ curl -sL https://firebase.tools | bash
 ```
 
-Loging and test the CLI
+Login and test the CLI
 
 ```
 $ firebase login

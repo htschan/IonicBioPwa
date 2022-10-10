@@ -6,9 +6,10 @@
     "myhome-c5350": {
       "hosting": {
         "IonicBioPwa": [
-          "ionic-bio-pwa"
+          "ionic-bio"
         ]
       }
     }
   },
-  "etags": {}}
+  "etags": {}
+}
