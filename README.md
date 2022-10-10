@@ -10,6 +10,17 @@ In case of updating the CLI, just uninstall old CLI
 $ npm uninstall -g ionic
 ```
 
+# Create an app
+
+```
+$ ionic start
+```
+
+A sample app is here:
+
+https://www.learmoreseekmore.com/2021/01/ionic-vue-app-side-menu-integration-with-ion-menu-component.html
+
+
 # Create PWA
 
 ```
@@ -42,4 +53,26 @@ Initialize a Firebase project
 
 ```
 $ firebase init
+```
+
+Add firebaseui
+
+```
+$ npm install firebaseui --save
+```
+
+Add firebase config
+
+```
+const firebaseConfig = {
+  apiKey: "AIzaxxxxxxxULDjYuxxxxxxxHwz8jbk-QxxxxxA",
+  authDomain: "xxxxxxxxx.firebaseapp.com",
+  databaseURL: "https://xxxxxxxx.firebaseio.com",
+  projectId: "xxxxxxx",
+  storageBucket: "xxxxxxxxx.appspot.com",
+  messagingSenderId: "834534534546",
+  appId: "1:84324234846:web:4f523423435fdecf22eae4f7"
+};
+
+firebase.initializeApp(firebaseConfig);
 ```
