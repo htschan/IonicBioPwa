@@ -3,11 +3,11 @@
         <div>Profile Page</div>
         <p>
             name:
-            <strong>{{user?.displayName}}</strong>
+            <strong>{{AppAuth.user?.displayName}}</strong>
             <br />email:
-            <strong>{{user?.email}}</strong>
+            <strong>{{AppAuth.user?.email}}</strong>
             <br />uid:
-            <strong>{{user?.uid}}</strong>
+            <strong>{{AppAuth.user?.uid}}</strong>
             <br />provider:
             <!-- <strong class="teal-text">{{user?.providerData[0]?.providerId}}</strong> -->
         </p>
@@ -15,18 +15,13 @@
 </template>
 
 <script lang="ts">
-import firebase from 'firebase/compat/app';
 import { defineComponent } from 'vue';
+import { AppAuth } from "../services/AuthState";
 
 export default defineComponent({
     name: "ProfilePage",
     data() {
-        return { user: {} as firebase.User }
-    },
-    mounted() {
-        firebase.auth().onAuthStateChanged(u => {
-            this.user = u as firebase.User;
-        });
-    },
+        return { AppAuth }
+    }
 });
 </script>

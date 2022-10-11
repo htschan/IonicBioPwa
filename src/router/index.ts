@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import firebase from 'firebase/compat/app';
-import { isNavigationFailure, RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue';
 import LoginPage from '../views/LoginPage.vue';
 import LogoutPage from '../views/LogoutPage.vue';
 import ProfilePage from '../views/ProfilePage.vue';
+import { AppAuth } from "../services/AuthState";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -43,6 +44,8 @@ const firebaseConfig = {
   appId: "1:844342741846:web:1a096ff331424904eae4f7"
 };
 
+AppAuth.AuthState = null;
+
 firebase.initializeApp(firebaseConfig);
 
 const router = createRouter({
@@ -51,37 +54,16 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-  if (!isAuthenticated() && to.name !== 'Login') {
+  console.log(`before to: ${String(to.name)} from: ${String(from.name)}  Authentocated: ${AppAuth.Authenticated}`);
+  if (!AppAuth.Authenticated && to.name !== 'Login') {
     console.log(`before to: ${String(to.name)} from: ${String(from.name)}`);
     return { name: 'Login' }
   }
+  console.log("Router beforeRach");
 })
 
-// router.afterEach((to, from, failure) => {
-//   console.log(`after to: ${String(to.name)} from: ${String(from.name)}`);
-//   if (isNavigationFailure(failure)) {
-//     console.log("---- Navigation failed ---");
-//   }
-// })
-
-let user: firebase.User;
-function isAuthenticated() {
-  return user != null;
-}
-
 firebase.auth().onAuthStateChanged(u => {
-  user = u as firebase.User;
-  const cr = router.currentRoute;
-  console.log(`onAuthStateChange current route: ${String(cr.value.name)}  user: ${user}`);
-  // if (user != null && cr.value.name === 'Login') {
-  //   console.log(`onAuthStateChange push to Home`);
-  //   router.push('Home');
-  // }
-  // if (user == null && cr.value.name === 'Login') {
-  //   console.log(`onAuthStateChange push to Login`);
-  //   router.push('Login');
-  // }
-  // console.log(`onAuthStateChange ---------------------------`);
+  AppAuth.AuthState = u;
 });
 
 export default router
