@@ -6,9 +6,9 @@
 </template>
 
 <script lang="ts">
+import { useIonRouter } from '@ionic/vue';
 import firebase from 'firebase/compat/app';
 import { defineComponent } from 'vue';
-
 
 export default defineComponent({
     name: "LogoutPage",
@@ -24,9 +24,18 @@ export default defineComponent({
         signoutButtonPressed(e: any) {
             e.stopPropagation();
             firebase.auth().signOut();
-            this.$router.push({ name: "Login" });
+            this.gotoLogin();
         }
     },
+    setup() {
+        const ionRouter = useIonRouter();
+        const gotoLogin = () => {
+            ionRouter.navigate({ name: "Login" });
+        }
+        return {
+            gotoLogin
+        }
+    }
 });
 
 </script>
