@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "myhome-c5350"
+  },
+  "targets": {
+    "myhome-c5350": {
+      "hosting": {
+        "IonicBioPwa": [
+          "ionic-bio"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
