@@ -20,7 +20,8 @@ import '@ionic/vue/css/text-transformation.css';
 import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
 import firebase from 'firebase/compat/app';
-import MasterLayout from './components/MasterLayout.vue'
+import MasterLayout from './components/MasterLayout.vue';
+import './registerServiceWorker';
 
 /* Theme variables */
 import './theme/variables.css';
