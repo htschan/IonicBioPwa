@@ -21,16 +21,22 @@ import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
 import MasterLayout from './components/MasterLayout.vue';
 import './registerServiceWorker';
+import { createPinia } from 'pinia';
+import { useAuthStore } from './stores/AuthStore';
 
 /* Theme variables */
 import './theme/variables.css';
 
+const pinia = createPinia()
 const app = createApp(App)
   .use(IonicVue)
+  .use(pinia)
   .use(router);
 
 app.component('master-layout', MasterLayout);
 
 router.isReady().then(() => {
   app.mount('#app');
+  const authStore = useAuthStore();
+  authStore.init();
 });
