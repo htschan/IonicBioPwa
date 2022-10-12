@@ -53,17 +53,18 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from) => {
-  console.log(`before to: ${String(to.name)} from: ${String(from.name)}  Authentocated: ${AppAuth.Authenticated}`);
-  if (!AppAuth.Authenticated && to.name !== 'Login') {
-    console.log(`before to: ${String(to.name)} from: ${String(from.name)}`);
-    return { name: 'Login' }
-  }
-  console.log("Router beforeRach");
-})
-
 firebase.auth().onAuthStateChanged(u => {
   AppAuth.AuthState = u;
+  const currRoute = String(router.currentRoute.value.name);
+  console.log(`currentRoute ${currRoute} Authenticated: ${AppAuth.Authenticated}`);
+  if (AppAuth.Authenticated && currRoute === 'Login') {
+    console.log(`--- in onAuthStatgeChanged when authenticated and still on login route`);
+    router.push("Home");
+  }
+  if (!AppAuth.Authenticated && currRoute !== 'Login') {
+    console.log(`--- in onAuthStatgeChanged when not authenticated and not on login route`);
+    router.push("Login");
+  }
 });
 
 export default router
