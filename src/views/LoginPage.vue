@@ -11,6 +11,7 @@ import { defineComponent } from 'vue';
 import firebase from 'firebase/compat/app';
 import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
+import { useAuthStore } from '@/stores/AuthStore';
 
 
 export default defineComponent({
@@ -21,13 +22,15 @@ export default defineComponent({
     setup() {
         onIonViewWillEnter(() => {
             // Initialize the FirebaseUI Widget using Firebase.
+            const authStore = useAuthStore();
+
             let ui = firebaseui.auth.AuthUI.getInstance();
             if (!ui) {
-                ui = new firebaseui.auth.AuthUI(firebase.auth());
+                ui = new firebaseui.auth.AuthUI(authStore.auth);
             }
 
             var uiConfig = {
-                signInSuccessUrl: '/',
+                signInSuccessUrl: '/login',
                 signInOptions: [
                     // Leave the lines as is for the providers you want to offer your users.
                     firebase.auth.GoogleAuthProvider.PROVIDER_ID,

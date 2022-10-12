@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
+import "firebase/compat/firestore";
 import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue';
 import LoginPage from '../views/LoginPage.vue';
@@ -38,3 +39,4 @@ const router = createRouter({
 })
 
 export default router
+
