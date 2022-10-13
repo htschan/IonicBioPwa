@@ -10,6 +10,9 @@
                 <ion-item v-if="authStore.isAuthenticated" button @click="menuNavigation('/Home')">
                     <ion-label>Home</ion-label>
                 </ion-item>
+                <ion-item v-if="authStore.isAuthenticated" button @click="menuNavigation('/Bp')">
+                    <ion-label>Bp</ion-label>
+                </ion-item>
                 <ion-item v-if="!authStore.isAuthenticated" button @click="menuNavigation('/Login')">
                     <ion-label>Login</ion-label>
                 </ion-item>

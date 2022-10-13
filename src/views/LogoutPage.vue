@@ -1,7 +1,7 @@
 <template>
     <master-layout pageTitle="Logout">
         <div>Logout page</div>
-        <span><a @click="signoutButtonPressed">Logout {{ authStore.user?.email }}</a></span>
+        <ion-button @click="signoutButtonPressed">Logout {{ authStore.user?.email }}</ion-button>
     </master-layout>
 </template>
 

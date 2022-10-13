@@ -1,7 +1,7 @@
 <template>
     <master-layout pageTitle="Home">
         <div>Welcom Home Page !</div>
-        <button @click="store.load()">Load</button>
+        <ion-button @click="store.load()">Load</ion-button>
         <div>
             Authenticated: {{authStore.isAuthenticated}}
         </div>
@@ -19,12 +19,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { IonItem, IonList } from "@ionic/vue";
+import { IonButton, IonItem, IonList } from "@ionic/vue";
 import { useDataStore } from "../stores/DataStore";
 import { useAuthStore } from "@/stores/AuthStore";
 
 export default defineComponent({
-    components: { IonList, IonItem },
+    components: { IonList, IonItem, IonButton },
     data() {
         const store = useDataStore()
         const authStore = useAuthStore();
