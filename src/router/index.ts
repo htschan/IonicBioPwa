@@ -4,6 +4,7 @@ import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue';
 import BpPage from '../views/BpPage.vue';
 import BpUpdatePage from '../views/BpUpdatePage.vue';
+import BpAddPage from '../views/BpAddPage.vue';
 import LoginPage from '../views/LoginPage.vue';
 import LogoutPage from '../views/LogoutPage.vue';
 import ProfilePage from '../views/ProfilePage.vue';
@@ -27,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/bpupdate/:id',
     name: 'BpUpdate',
     component: BpUpdatePage
+  },
+  {
+    path: '/bpadd',
+    name: 'BpAdd',
+    component: BpAddPage
   },
   {
     path: '/login',

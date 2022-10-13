@@ -66,4 +66,5 @@ export interface IBpItem {
     lo: number
     hr: number
     dt: string
+    co: string
 } 

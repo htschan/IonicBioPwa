@@ -8,6 +8,7 @@ export interface IBpItem {
     hr: number
     dt: string
     id: string
+    co: string
 }
 
 export default () => {
@@ -46,7 +47,15 @@ export default () => {
         const authStore = useAuthStore();
         const uid = authStore.user?.uid;
         const firebaseCollection = authStore.db.collection(`UserItems/${uid}/BpItems`);
-        firebaseCollection.doc(updatedData.id).update(updatedData);
+        return firebaseCollection.doc(updatedData.id).update(updatedData);
+    }
+    const addBpItem = async (data: IBpItem) => {
+        const authStore = useAuthStore();
+        const uid = authStore.user?.uid;
+        const firebaseCollection = authStore.db.collection(`UserItems/${uid}/BpItems`);
+        const firebaseObject = await firebaseCollection.add(data);
+        console.log(firebaseObject);
+        return firebaseObject;
     }
     const readOperation = async (collectionName: any) => {
         const authStore = useAuthStore();
@@ -92,6 +101,7 @@ export default () => {
         deleteBpItem,
         findBpItemByDocId,
         updateBpItem,
+        addBpItem,
         readOperation,
         createOperation,
         deleteOperation,

@@ -1,6 +1,9 @@
 <template>
     <master-layout pageTitle="Bp">
-        <div>Update Blutdruck</div>
+        <div>Add Blutdruck</div>
+        <div>
+            Authenticated: {{authStore.isAuthenticated}} &nbsp;
+        </div>
         <ion-content>
             <ion-row>
                 <ion-col>
@@ -22,7 +25,13 @@
             </ion-row>
             <ion-row>
                 <ion-col>
-                    <ion-button @click="updateOperation()">Update Data</ion-button>
+                    <ion-input type="text" v-model="bpItem.co" placeholder="Enter comment" class="input"
+                        padding-horizontal></ion-input>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-button @click="addOperation()">Add</ion-button>
                 </ion-col>
                 <ion-col>
                     <ion-button @click="cancel()">cancel</ion-button>
@@ -45,22 +54,18 @@ export default defineComponent({
         const authStore = useAuthStore();
         return {
             authStore,
-            bpItem: {} as IBpItem,
-            id: ""
+            bpItem: {} as IBpItem
         }
-    },
-    async ionViewDidEnter() {
-        this.id = this.$route.params.id as string;
-        this.bpItem = await firebaseService().findBpItemByDocId(this.id);
     },
     methods: {
         async cancel() {
-            this.$router.push({ name: 'Bp' })
+            this.$router.push({ name: 'Home' })
         },
-        async updateOperation() {
+        async addOperation() {
             const item = Object.assign({}, this.bpItem);
-            await firebaseService().updateBpItem(this.id, item);
-            this.$router.push({ name: 'Bp' })
+            item.dt = new Date().toISOString();
+            await firebaseService().addBpItem(item);
+            this.$router.push({ name: 'Home' })
         }
     }
 });

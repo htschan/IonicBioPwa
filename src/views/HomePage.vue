@@ -1,37 +1,73 @@
 <template>
     <master-layout pageTitle="Home">
-        <div>Welcom Home Page !</div>
-        <ion-button @click="store.load()">Load</ion-button>
-        <div>
-            Authenticated: {{authStore.isAuthenticated}}
-        </div>
-        <div>
-            count: {{store.count}}
-        </div>
-        <ion-list>
-            <ion-item v-for="item in store.bpItems" :key="item.dt">
-                {{item.dt}}&nbsp;{{item.hi}}&nbsp;{{item.lo}}&nbsp;{{item.hr}}
-            </ion-item>
-        </ion-list>
+        <div>Bludtdruck ({{dataStore.count}})</div>
+        <ion-button @click="dataStore.load()">Load</ion-button>
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button @click="addOperation()">
+                <ion-icon :icon="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+        <ion-grid>
+            <ion-row v-for="item in dataStore.bpItems" :key="item.dt">
+                <ion-card color="warning">
+                    <ion-card-title>
+                        {{item.hi}}
+                        {{item.lo}}
+                        {{item.hr}}
+                    </ion-card-title>
+                    <ion-card-subtitle>
+                        {{shortDateTime(item.dt)}}
+                    </ion-card-subtitle>
+                    <ion-card-content>
+                        {{item.co}}
+                    </ion-card-content>
+                </ion-card>
+            </ion-row>
+        </ion-grid>
     </master-layout>
 
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { IonButton, IonItem, IonList } from "@ionic/vue";
+import { IonButton, IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonFab, IonFabButton, IonGrid, IonIcon, IonRow } from "@ionic/vue";
 import { useDataStore } from "../stores/DataStore";
 import { useAuthStore } from "@/stores/AuthStore";
+import { add } from "ionicons/icons";
 
 export default defineComponent({
-    components: { IonList, IonItem, IonButton },
+    components: { IonButton, IonGrid, IonRow, IonFab, IonFabButton, IonIcon, IonCard, IonCardTitle, IonCardSubtitle, IonCardContent },
     data() {
-        const store = useDataStore()
+        const dataStore = useDataStore()
         const authStore = useAuthStore();
         return {
-            store,
+            dataStore,
             authStore
+        }
+    },
+    methods: {
+        async addOperation() {
+            this.$router.push({ name: 'BpAdd' })
+        },
+        shortDateTime(longTime: string): string {
+            const dt = new Date(longTime);
+            return `${dt.toLocaleDateString()} ${dt.toLocaleTimeString()}`
+        }
+    },
+    setup() {
+        return {
+            add
         }
     }
 });
+
 </script>
+<style scoped>
+ion-card {
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 10 !important;
+}
+</style>
