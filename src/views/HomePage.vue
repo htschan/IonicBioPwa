@@ -1,7 +1,7 @@
 <template>
     <master-layout pageTitle="Home">
         <div>Bludtdruck ({{dataStore.count}})</div>
-        <ion-button @click="dataStore.load()">Load</ion-button>
+        <ion-button @click="dataStore.load()" color="primary">Update</ion-button>
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
             <ion-fab-button @click="addOperation()">
                 <ion-icon :icon="add"></ion-icon>
@@ -9,7 +9,7 @@
         </ion-fab>
         <ion-grid>
             <ion-row v-for="item in dataStore.bpItems" :key="item.dt">
-                <ion-card color="warning">
+                <ion-card>
                     <ion-card-title>
                         {{item.hi}}
                         {{item.lo}}
@@ -65,9 +65,10 @@ export default defineComponent({
 <style scoped>
 ion-card {
     display: flex;
+    background: linear-gradient(#f4f5f8, #ffd534);
     flex-direction: column;
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: 350px !important;
     margin: 10 !important;
 }
 </style>

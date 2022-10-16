@@ -26,6 +26,7 @@ import { useAuthStore } from './stores/AuthStore';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/app.css';
 
 const pinia = createPinia()
 const app = createApp(App)

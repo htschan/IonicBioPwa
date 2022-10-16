@@ -7,11 +7,14 @@
 
 <script lang="ts">
 import { useAuthStore } from '@/stores/AuthStore';
-import { useIonRouter } from '@ionic/vue';
+import { IonButton, useIonRouter } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: "LogoutPage",
+    components: {
+        IonButton
+    },
     data() {
         const authStore = useAuthStore();
         return { authStore }

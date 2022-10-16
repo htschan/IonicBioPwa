@@ -84,6 +84,9 @@ Integrate Firebase into Ionic/Vue
 https://www.enappd.com/blog/ionic-vue-with-firebase-firestore/194/
 
 
+ionic-v6-firebase-tabs-auth
+
+https://github.com/aaronksaunders/ionic-v6-firebase-tabs-auth
 
 
 # Deploy
