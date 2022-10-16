@@ -39,7 +39,7 @@ import { IBpItem } from '../services/firebaseService';
 import NumberEdit from "@/components/NumberEdit.vue";
 
 export default defineComponent({
-    components: { IonButton, IonContent, IonRow, IonCol, NumberEdit  },
+    components: { IonButton, IonContent, IonRow, IonCol, NumberEdit, IonInput  },
     data() {
         const authStore = useAuthStore();
         return {

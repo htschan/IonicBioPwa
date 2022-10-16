@@ -32,7 +32,7 @@ export default defineComponent({
     props: {
         placeHolder: String,
         labelText: String,
-        modelValue: Number,
+        modelValue: [String, Number],
         min: String,
         max: String
     },
