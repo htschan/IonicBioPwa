@@ -48,7 +48,6 @@ export default defineComponent({
     methods: {
         async addOperation() {
             this.$router.push({ name: 'BpAdd'})
-            //            this.$router.push({ name: 'BpAdd' })
         },
         shortDateTime(longTime: string): string {
             const dt = new Date(longTime);

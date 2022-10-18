@@ -77,6 +77,17 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 ```
 
+## Preferences (Storage)
+
+```
+$ npm install @capacitor/preferences
+```
+
+Refer to 
+
+https://capacitorjs.com/docs/apis/preferences
+
+
 ## Samples
 
 Integrate Firebase into Ionic/Vue

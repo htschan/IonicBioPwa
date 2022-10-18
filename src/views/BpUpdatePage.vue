@@ -39,6 +39,7 @@ import { useAuthStore } from "@/stores/AuthStore";
 import firebaseService from '../services/firebaseService';
 import { IBpItem } from '../services/firebaseService';
 import NumberEditComp from "@/components/NumberEditComp.vue";
+import { Preferences } from '@capacitor/preferences';
 
 export default defineComponent({
     components: { IonButton, IonContent, IonRow, IonCol, NumberEditComp, IonInput },
@@ -54,13 +55,19 @@ export default defineComponent({
     async ionViewDidEnter() {
         if (this.$route.params.id === undefined) {
             this.updateMode = false
-            this.bpItem = {
-                co: "default comment",
-                hr: 66,
-                hi: 122,
-                lo: 88,
-                dt: new Date().toISOString()
-            } as IBpItem
+            const s = await Preferences.get({ key: "IBpItem" });
+            if (s && s.value) {
+                this.bpItem = JSON.parse(s.value)
+                this.bpItem.dt = new Date().toISOString()
+            } else {
+                this.bpItem = {
+                    co: "",
+                    hr: 60,
+                    hi: 120,
+                    lo: 80,
+                    dt: new Date().toISOString()
+                } as IBpItem
+            }
         } else {
             this.id = this.$route.params.id as string;
             this.bpItem = await firebaseService().findBpItemByDocId(this.id);
@@ -85,6 +92,10 @@ export default defineComponent({
             } else {
                 item.dt = new Date().toISOString();
                 await firebaseService().addBpItem(item);
+                await Preferences.set({
+                    key: "IBpItem",
+                    value: JSON.stringify(item)
+                })
                 this.$router.push({ name: 'Home' })
             }
         }
