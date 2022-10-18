@@ -1,15 +1,17 @@
 <template>
     <master-layout pageTitle="Bp">
-        <div>Update Blutdruck</div>
+        <div>{{modeString}} Blutdruck</div>
         <ion-content>
             <ion-row>
-                <number-edit label-text="Systole" v-model="bpItem.hi" place-holder="Systolisch"/>
+                <number-edit-comp label-text="Systole" v-model="bpItem.hi" place-holder="Systolisch" min="60"
+                    max="200" />
             </ion-row>
             <ion-row>
-                <number-edit label-text="Diastolisch" v-model="bpItem.lo" place-holder="Diastolisch" min="60" max="200"/>
+                <number-edit-comp label-text="Diastolisch" v-model="bpItem.lo" place-holder="Diastolisch" min="60"
+                    max="200" />
             </ion-row>
             <ion-row>
-                <number-edit label-text="Puls" v-model="bpItem.hr" place-holder="Puls" min="40" max="120"/>
+                <number-edit-comp label-text="Puls" v-model="bpItem.hr" place-holder="Puls" min="40" max="120" />
             </ion-row>
             <ion-row>
                 <ion-col>
@@ -17,10 +19,10 @@
                     </ion-input>
                 </ion-col>
             </ion-row>
-        
+
             <ion-row>
                 <ion-col>
-                    <ion-button @click="updateOperation()">Update Data</ion-button>
+                    <ion-button @click="save()">{{modeString}} Data</ion-button>
                 </ion-col>
                 <ion-col>
                     <ion-button @click="cancel()">cancel</ion-button>
@@ -36,35 +38,55 @@ import { IonButton, IonCol, IonContent, IonInput, IonRow } from "@ionic/vue";
 import { useAuthStore } from "@/stores/AuthStore";
 import firebaseService from '../services/firebaseService';
 import { IBpItem } from '../services/firebaseService';
-import NumberEdit from "@/components/NumberEdit.vue";
+import NumberEditComp from "@/components/NumberEditComp.vue";
 
 export default defineComponent({
-    components: { IonButton, IonContent, IonRow, IonCol, NumberEdit, IonInput  },
+    components: { IonButton, IonContent, IonRow, IonCol, NumberEditComp, IonInput },
     data() {
         const authStore = useAuthStore();
         return {
             authStore,
             bpItem: {} as IBpItem,
             id: "",
-            hi: 0
+            updateMode: false
         }
     },
     async ionViewDidEnter() {
-        this.id = this.$route.params.id as string;
-        this.bpItem = await firebaseService().findBpItemByDocId(this.id);
+        if (this.$route.params.id === undefined) {
+            this.updateMode = false
+            this.bpItem = {
+                co: "default comment",
+                hr: 66,
+                hi: 122,
+                lo: 88,
+                dt: new Date().toISOString()
+            } as IBpItem
+        } else {
+            this.id = this.$route.params.id as string;
+            this.bpItem = await firebaseService().findBpItemByDocId(this.id);
+            this.updateMode = true
+        }
+    },
+    computed: {
+        modeString() {
+            return this.updateMode === true ? "Update" : "Add"
+        }
+
     },
     methods: {
         async cancel() {
             this.$router.push({ name: 'Bp' })
         },
-        async updateOperation() {
+        async save() {
             const item = Object.assign({}, this.bpItem);
-            await firebaseService().updateBpItem(this.id, item);
-            this.$router.push({ name: 'Bp' })
-        },
-        valueChanged(param: any) {
-            debugger;
-            console.log("got value edited: " + param.modelValue);
+            if (this.updateMode) {
+                await firebaseService().updateBpItem(this.id, item);
+                this.$router.push({ name: 'Bp' })
+            } else {
+                item.dt = new Date().toISOString();
+                await firebaseService().addBpItem(item);
+                this.$router.push({ name: 'Home' })
+            }
         }
     }
 });

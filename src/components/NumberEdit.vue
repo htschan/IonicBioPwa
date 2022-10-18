@@ -11,23 +11,31 @@
                     class="input" padding-horizontal></ion-input>
             </ion-col>
             <ion-col>
-                <ion-button v-on:click="increment">up</ion-button>
+                <ion-button @click="decrement"><ion-icon :icon="remove"/></ion-button>
             </ion-col>
             <ion-col>
-                <ion-button @click="decrement">down</ion-button>
+                <ion-button v-on:click="increment"><ion-icon :icon="add"/></ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
 </template>
 
+<!-- Options API with Single File Component -->
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { remove, add } from 'ionicons/icons';
+import { defineComponent, toRef, toRefs } from 'vue'
 import { IonCol, IonGrid, IonRow, IonButton, IonInput, IonLabel } from '@ionic/vue';
 
 export default defineComponent({
     name: "NumberEdit",
     components: {
         IonCol, IonGrid, IonRow, IonButton, IonInput, IonLabel
+    },
+    data() {
+        return {
+            remove,
+            add
+        }
     },
     props: {
         placeHolder: String,
@@ -36,8 +44,16 @@ export default defineComponent({
         min: String,
         max: String
     },
+    setup(props){
+        const { max }  = toRefs(props);
+
+        console.log("---- setup max value " + max.value);
+        const min = toRef(props,'max');
+        console.log("-------setup min: " + min.value);
+    },
     methods: {
         updateValue(event: any) {
+            console.log(" --- updateValue max: ");
             this.$emit('update:modelValue', parseFloat(event.target.value))
         },
         increment() {
