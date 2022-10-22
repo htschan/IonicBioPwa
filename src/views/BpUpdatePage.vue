@@ -3,29 +3,35 @@
         <div>{{modeString}} Blutdruck</div>
         <ion-content>
             <ion-row>
-                <number-edit-comp label-text="Systole" v-model="bpItem.hi" place-holder="Systolisch" min="60"
+                <number-edit-comp label-text="Systole / ซิสโตลิก" v-model="bpItem.hi" place-holder="Systolisch" min="60"
                     max="200" />
             </ion-row>
             <ion-row>
-                <number-edit-comp label-text="Diastolisch" v-model="bpItem.lo" place-holder="Diastolisch" min="60"
+                <number-edit-comp label-text="Diastolisch / ไดแอสโตลิก" v-model="bpItem.lo" place-holder="Diastolisch" min="60"
                     max="200" />
             </ion-row>
             <ion-row>
-                <number-edit-comp label-text="Puls" v-model="bpItem.hr" place-holder="Puls" min="40" max="120" />
+                <number-edit-comp label-text="Puls / อัตราการเต้นของหัวใจ" v-model="bpItem.hr" place-holder="Puls" min="40" max="120" />
             </ion-row>
             <ion-row>
                 <ion-col>
-                    <ion-input type="text" v-model="bpItem.co" placeholder="Kommentar" class="input" padding-horizontal>
+                    <ion-input type="text" v-model="bpItem.co" placeholder="Kommentar / ความคิดเห็น" class="input" padding-horizontal>
                     </ion-input>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-datetime presentation="date-time" :prefer-wheel="true" :value="bpItem.dt" placeholder="Datum" class="input" padding-horizontal>
+                    </ion-datetime>
                 </ion-col>
             </ion-row>
 
             <ion-row>
                 <ion-col>
-                    <ion-button @click="save()">{{modeString}} Data</ion-button>
+                    <ion-button @click="save()">{{modeString}} Daten / ข้อมูล</ion-button>
                 </ion-col>
                 <ion-col>
-                    <ion-button @click="cancel()">cancel</ion-button>
+                    <ion-button @click="cancel()">cancel / ยกเลิก</ion-button>
                 </ion-col>
             </ion-row>
         </ion-content>
@@ -34,7 +40,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { IonButton, IonCol, IonContent, IonInput, IonRow } from "@ionic/vue";
+import { IonButton, IonCol, IonContent, IonInput, IonRow, IonDatetime } from "@ionic/vue";
 import { useAuthStore } from "@/stores/AuthStore";
 import firebaseService from '../services/firebaseService';
 import { IBpItem } from '../services/firebaseService';
@@ -42,7 +48,7 @@ import NumberEditComp from "@/components/NumberEditComp.vue";
 import { Preferences } from '@capacitor/preferences';
 
 export default defineComponent({
-    components: { IonButton, IonContent, IonRow, IonCol, NumberEditComp, IonInput },
+    components: { IonButton, IonContent, IonRow, IonCol, NumberEditComp, IonInput, IonDatetime },
     data() {
         const authStore = useAuthStore();
         return {
@@ -76,7 +82,7 @@ export default defineComponent({
     },
     computed: {
         modeString() {
-            return this.updateMode === true ? "Update" : "Add"
+            return this.updateMode === true ? "Update / เพื่ออัพเดท" : "Add / เพิ่ม"
         }
 
     },
@@ -94,7 +100,6 @@ export default defineComponent({
                 await firebaseService().updateBpItem(this.id, item);
                 this.$router.push({ name: 'Bp' })
             } else {
-                item.dt = new Date().toISOString();
                 await firebaseService().addBpItem(item);
                 await Preferences.set({
                     key: "IBpItem",

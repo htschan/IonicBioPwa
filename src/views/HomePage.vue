@@ -9,7 +9,7 @@
             <ion-row>
                 <ion-col>
                     <ion-card>
-                        <ion-card-title>Bludtdruck ({{dataStore.count}})</ion-card-title>
+                        <ion-card-title>Blutdruck / ความดันโลหิต({{dataStore.count}})</ion-card-title>
                     </ion-card>
                 </ion-col>
             </ion-row>
