@@ -37,7 +37,6 @@ export default defineComponent({
             this.$router.push({ name: 'BpUpdate', params: { id: item.id } })
         },
         async deleteOperation(item: IBpItem, index: any) {
-            console.log(item);
             this.bpList.splice(index, 1);
             await firebaseService().deleteBpItem(item.id);
         },

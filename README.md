@@ -100,6 +100,12 @@ ionic-v6-firebase-tabs-auth
 https://github.com/aaronksaunders/ionic-v6-firebase-tabs-auth
 
 
+# Build
+
+```
+ionic build --prod
+```
+
 # Deploy
 
 ```

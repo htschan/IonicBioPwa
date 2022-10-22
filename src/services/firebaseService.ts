@@ -34,7 +34,6 @@ export default () => {
         const authStore = useAuthStore();
         const uid = authStore.user?.uid;
         const firebaseCollection = authStore.db.collection(`UserItems/${uid}/BpItems`);
-        console.log(`findByItemByDocID ${id}`);
         const querySnapshot = await firebaseCollection.where(firebase.firestore.FieldPath.documentId(), "==", id).get();
         const result = querySnapshot.docs.map((doc) => {
             const bpItem = doc.data() as IBpItem;
@@ -54,7 +53,6 @@ export default () => {
         const uid = authStore.user?.uid;
         const firebaseCollection = authStore.db.collection(`UserItems/${uid}/BpItems`);
         const firebaseObject = await firebaseCollection.add(data);
-        console.log(firebaseObject);
         return firebaseObject;
     }
     const readOperation = async (collectionName: any) => {
@@ -70,7 +68,6 @@ export default () => {
         const authStore = useAuthStore();
         const firebaseCollection = authStore.db.collection(collectionName);
         const firebaseObject = await firebaseCollection.add(data);
-        console.log(firebaseObject);
         return firebaseObject;
     }
     const deleteOperation = async (collectionName: any, username: any) => {

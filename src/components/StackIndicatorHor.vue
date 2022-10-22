@@ -28,7 +28,7 @@
 <!-- Composition API with Single File Component -->
 <!-- https://vuejs.org/api/sfc-script-setup.html#basic-syntax -->
 <script setup lang="ts">
-import { IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonGrid, IonRow } from '@ionic/vue';
 import { defineProps, computed, toRef } from 'vue';
 
 const props = defineProps({
