@@ -111,3 +111,11 @@ ionic build --prod
 ```
 $ firebase deploy --only hosting:IonicBioPwa
 ```
+
+# Github Actions
+
+ For which GitHub repository would you like to set up a GitHub workflow? (format: user/repository) htschan/IonicBioPwa
+
+✔  Created service account github-action-549452029 with Firebase Hosting admin permissions.
+✔  Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_MYHOME_C5350.
+i  You can manage your secrets at https://github.com/htschan/IonicBioPwa/settings/secrets.
