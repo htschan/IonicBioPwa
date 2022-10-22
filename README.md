@@ -77,6 +77,17 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 ```
 
+## Preferences (Storage)
+
+```
+$ npm install @capacitor/preferences
+```
+
+Refer to 
+
+https://capacitorjs.com/docs/apis/preferences
+
+
 ## Samples
 
 Integrate Firebase into Ionic/Vue
@@ -84,10 +95,27 @@ Integrate Firebase into Ionic/Vue
 https://www.enappd.com/blog/ionic-vue-with-firebase-firestore/194/
 
 
+ionic-v6-firebase-tabs-auth
 
+https://github.com/aaronksaunders/ionic-v6-firebase-tabs-auth
+
+
+# Build
+
+```
+ionic build --prod
+```
 
 # Deploy
 
 ```
 $ firebase deploy --only hosting:IonicBioPwa
 ```
+
+# Github Actions
+
+ For which GitHub repository would you like to set up a GitHub workflow? (format: user/repository) htschan/IonicBioPwa
+
+✔  Created service account github-action-549452029 with Firebase Hosting admin permissions.
+✔  Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_MYHOME_C5350.
+i  You can manage your secrets at https://github.com/htschan/IonicBioPwa/settings/secrets.

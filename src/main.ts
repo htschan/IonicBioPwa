@@ -26,6 +26,7 @@ import { useAuthStore } from './stores/AuthStore';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/app.css';
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -37,6 +38,5 @@ app.component('master-layout', MasterLayout);
 
 router.isReady().then(() => {
   app.mount('#app');
-  const authStore = useAuthStore();
-  authStore.init();
+  useAuthStore().init();
 });

@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /UserItems/{uid}/BpItems/{document=**} {
+      allow read, write: if isLoggedIn() && isMyDocument(uid);
+      
+    }
+  }
+  
+  function isLoggedIn(){
+  	return request.auth != null;
+  }
+  
+  function isMyDocument(uid){
+  	// uid of incoming doc should match the authenticated user
+    return uid == request.auth.uid;
+  }
+}

@@ -41,7 +41,6 @@ export const useDataStore = defineStore('BpItemStore', {
         },
         // async variant
         async loadAsync() {
-            console.log("loadAsync called...");
             const authStore = useAuthStore();
             const FirebaseCollection = authStore.db.collection(`UserItems/${authStore.user?.uid}/BpItems`);
             const querySnapshot = await FirebaseCollection.orderBy("dt", "desc").get();
@@ -66,4 +65,5 @@ export interface IBpItem {
     lo: number
     hr: number
     dt: string
+    co: string
 } 
