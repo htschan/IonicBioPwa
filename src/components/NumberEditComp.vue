@@ -57,7 +57,6 @@ function decrement() {
 }
 
 function updateValue(event: any) {
-    console.log("-----  event: " + event.target.value)
     emit('update:modelValue', event.target.value)
 }
 </script>

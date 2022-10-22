@@ -82,7 +82,11 @@ export default defineComponent({
     },
     methods: {
         async cancel() {
-            this.$router.push({ name: 'Bp' })
+            if (this.updateMode) {
+                this.$router.push({ name: 'Bp' })
+            } else {
+                this.$router.push({ name: 'Home' })
+            }
         },
         async save() {
             const item = Object.assign({}, this.bpItem);

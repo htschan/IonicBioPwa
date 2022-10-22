@@ -46,14 +46,10 @@ export default defineComponent({
     },
     setup(props){
         const { max }  = toRefs(props);
-
-        console.log("---- setup max value " + max.value);
         const min = toRef(props,'max');
-        console.log("-------setup min: " + min.value);
     },
     methods: {
         updateValue(event: any) {
-            console.log(" --- updateValue max: ");
             this.$emit('update:modelValue', parseFloat(event.target.value))
         },
         increment() {
