@@ -15,9 +15,8 @@ jobs:
       - name: process secrets
         run: |
           echo "hallo"
-          echo "${FIREBASE_CONFIG_BASE64}"
-          echo "${FIREBASE_CONFIG_BASE64}" >> ./firebase.config.ts
-          echo "${FIREBASE_CONFIG_BASE64}" | base64 --decode
+          echo $FIREBASE_CONFIG_BASE64 | base64 --decode > ./firebase.config.ts
+          ls -la ./firebase.config.ts
         shell: bash
         env:
           FIREBASE_CONFIG_BASE64: ${{secrets.FIREBASE_CONFIG}}
