@@ -5,7 +5,7 @@
             <ion-item v-for="(item, index) in bpList" :key="index">
                 {{shortDateTime(item.dt)}}<br>
                 {{item.hi}}&nbsp;{{item.lo}}&nbsp;{{item.hr}}
-                <ion-button slot="end" @click="updateOperation(item, index)">update</ion-button>
+                <ion-button slot="end" @click="updateOperation(item)">update</ion-button>
                 <ion-button slot="end" @click="deleteOperation(item, index)">Delete</ion-button>
             </ion-item>
         </ion-list>
@@ -33,7 +33,7 @@ export default defineComponent({
         this.bpList = await firebaseService().readOrderedBpItems()
     },
     methods: {
-        async updateOperation(item: IBpItem, index: any) {
+        async updateOperation(item: IBpItem) {
             this.$router.push({ name: 'BpUpdate', params: { id: item.id } })
         },
         async deleteOperation(item: IBpItem, index: any) {

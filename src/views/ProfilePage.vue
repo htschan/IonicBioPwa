@@ -49,7 +49,7 @@
                                 </ion-row>
                                 <ion-row>
                                     <ion-col>
-                                        provider:
+                                        
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
