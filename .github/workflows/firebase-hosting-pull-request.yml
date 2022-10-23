@@ -16,7 +16,8 @@ jobs:
         run: |
           pwd
           # echo $FIREBASE_CONFIG_BASE64 >> ./firebase.config.ts
-          echo $FIREBASE_CONFIG_BASE64
+          echo "hallo"
+          echo "${FIREBASE_CONFIG_BASE64}"
           # cat ./firebase.config.ts
         shell: bash
         env:
