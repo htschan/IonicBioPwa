@@ -15,7 +15,7 @@ jobs:
       - name: process secrets
         run: |
           pwd
-          echo $FIREBASE_CONFIG_BASE64 &#166; base64 --decode &gt;&gt; ./firebase.config.ts
+          echo $FIREBASE_CONFIG_BASE64 &gt;&gt; ./firebase.config.ts
           cat ./firebase.config.ts
         shell: bash
         env:
