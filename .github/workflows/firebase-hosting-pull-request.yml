@@ -14,11 +14,10 @@ jobs:
           node-version: 18
       - name: process secrets
         run: |
-          pwd
-          # echo $FIREBASE_CONFIG_BASE64 >> ./firebase.config.ts
           echo "hallo"
           echo "${FIREBASE_CONFIG_BASE64}"
-          # cat ./firebase.config.ts
+          echo "${FIREBASE_CONFIG_BASE64}" >> ./firebase.config.ts
+          ls -la ./firebase.config.ts
         shell: bash
         env:
           FIREBASE_CONFIG_BASE64: ${{secrets.FIREBASE_CONFIG}}
