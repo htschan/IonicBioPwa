@@ -8,6 +8,7 @@ name: Deploy to Firebase Hosting on merge
       - main
 jobs:
   build_and_deploy:
+    environment: prod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +17,7 @@ jobs:
           node-version: 18
       - name: process secrets
         run: |
-          echo $FIREBASE_CONFIG_BASE64 &#124; base64 --decode &gt;&gt; ./firebase.config.ts
+          echo "$FIREBASE_CONFIG_BASE64" | base64 -d > ./firebase.config.ts
         shell: bash
         env:
           FIREBASE_CONFIG_BASE64: ${{secrets.FIREBASE_CONFIG}}
