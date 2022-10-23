@@ -17,6 +17,7 @@ jobs:
           echo "hallo"
           echo $FIREBASE_CONFIG_BASE64 | base64 --decode > ./firebase.config.ts
           ls -la ./firebase.config.ts
+          cat ./firebase.config.ts
         shell: bash
         env:
           FIREBASE_CONFIG_BASE64: ${{secrets.FIREBASE_CONFIG}}
