@@ -5,6 +5,7 @@ name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
   build_and_preview:
+    environment: prod
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
@@ -12,6 +13,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 18
+      - name: process secrets
+        run: |
+          echo "hallo"
+          echo "$FIREBASE_CONFIG_BASE64" | base64 -d > ./firebase.config.ts
+          ls -la ./firebase.config.ts
+          cat ./firebase.config.ts
+        shell: bash
+        env:
+          FIREBASE_CONFIG_BASE64: ${{secrets.FIREBASE_CONFIG}}
       - run: |
           npm install
           npm run build

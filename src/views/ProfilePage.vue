@@ -49,7 +49,7 @@
                                 </ion-row>
                                 <ion-row>
                                     <ion-col>
-                                        
+                                        Version 0.1.1
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
