@@ -16,7 +16,7 @@ jobs:
         run: |
           pwd
           echo $FIREBASE_CONFIG_BASE64 &#166; base64 --decode &gt;&gt; ./firebase.config.ts
-          ls -la
+          cat ./firebase.cofnig.ts
         shell: bash
         env:
           FIREBASE_CONFIG_BASE64: ${{secrets.FIREBASE_CONFIG}}
