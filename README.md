@@ -1,3 +1,21 @@
+# Intro
+
+This is a small demo PWA [(Progressive Web App)](https://en.wikipedia.org/wiki/Progressive_web_app) featuring:
+
+- Ionic 6
+- Vue.js 3
+- Capacitor
+- Firebase UI for authentication
+- Firestore
+- Firebase Hosting
+- Pinia datastore
+- Github Actions
+
+The purpose of the app is to manually record Blood Pressure Measurements (BPM).
+The BPM's are visually rated against the recommendations from [Swissheart Foundation](https://swissheart.ch/so-bleiben-sie-gesund/gesund-leben/blutdruck).
+
+
+
 # Ionic
 
 ```
