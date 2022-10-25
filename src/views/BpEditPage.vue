@@ -31,10 +31,10 @@
 
             <ion-row>
                 <ion-col>
-                    <ion-button @click="save()">{{modeString}}</ion-button>
+                    <ion-button @click="cancel()">cancel / ยกเลิก</ion-button>
                 </ion-col>
                 <ion-col>
-                    <ion-button @click="cancel()">cancel / ยกเลิก</ion-button>
+                    <ion-button @click="save()">{{modeString}}</ion-button>
                 </ion-col>
             </ion-row>
         </ion-content>
